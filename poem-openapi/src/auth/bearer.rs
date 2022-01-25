@@ -12,6 +12,7 @@ pub struct Bearer {
 impl BearerAuthorization for Bearer {
     fn from_request(req: &Request) -> Result<Self> {
         if let Some(auth) = req.headers().typed_get::<Authorization>().ok().flatten() {
+            println!("{auth}");
             if auth.0.scheme() == &AuthScheme::BEARER {
                 if let Some(token68) = auth.token68() {
                     return Ok(Bearer {
