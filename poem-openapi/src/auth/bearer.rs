@@ -11,6 +11,7 @@ pub struct Bearer {
 
 impl BearerAuthorization for Bearer {
     fn from_request(req: &Request) -> Result<Self> {
+        println!("BearerAuth from {req:?}");
         if let Some(auth) = req.headers().typed_get::<Authorization>().ok().flatten() {
             let a = &auth.to_string();
             println!("{a}");
